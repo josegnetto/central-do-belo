@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Modo escuro é o modo principal do site. */
+:root {
+  --color-ink: #f4f2ef;
+  --color-ink-soft: #d6d3ce;
+  --color-paper: #0a0a0a;
+  --color-paper-muted: #151515;
+  --color-accent: #e8352b;
+  --color-accent-dark: #ff5b4f;
+  --color-accent-soft: rgba(232, 53, 43, 0.32);
+  --color-line: #2a2a2a;
+  --color-muted: #9c9a95;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0);
+  --shadow-md: 0 1px 2px rgba(0, 0, 0, 0);
+  --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --color-ink: #0a0a0a;
+  --color-ink-soft: #262626;
+  --color-paper: #ffffff;
+  --color-paper-muted: #f7f6f4;
+  --color-accent: #cc1414;
+  --color-accent-dark: #9c0f0f;
+  --color-accent-soft: rgba(204, 20, 20, 0.12);
+  --color-line: #e6e3df;
+  --color-muted: #6b6b6b;
+  --shadow-sm: 0 2px 6px rgba(15, 15, 15, 0.12), 0 1px 3px rgba(15, 15, 15, 0.1);
+  --shadow-md: 0 20px 45px -10px rgba(15, 15, 15, 0.28), 0 8px 20px -8px rgba(15, 15, 15, 0.16);
+  --shadow-lg: 0 35px 70px -15px rgba(15, 15, 15, 0.38), 0 15px 30px -10px rgba(15, 15, 15, 0.22);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-paper: var(--color-paper);
+  --color-paper-muted: var(--color-paper-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-dark: var(--color-accent-dark);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-line: var(--color-line);
+  --color-muted: var(--color-muted);
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+}
+
+body {
+  background:
+    radial-gradient(ellipse 1200px 600px at 50% -10%, var(--color-paper-muted), transparent),
+    var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+.article-body {
+  font-family: var(--font-serif);
+  --tw-prose-body: var(--color-ink-soft);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink-soft);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-muted);
+  --tw-prose-bullets: var(--color-accent);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-muted);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-ink-soft);
+  --tw-prose-pre-bg: var(--color-paper-muted);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+}
+
+.article-body p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.article-body a {
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent-soft);
+}
+
+.article-body blockquote {
+  border-left-color: var(--color-accent);
+}
+
+.star-divider {
+  color: var(--color-accent);
+}
+
+.card-glow {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.card-glow:hover {
+  border-color: var(--color-accent-soft);
+  box-shadow: var(--shadow-lg), 0 12px 40px -16px var(--color-accent-soft);
+  transform: translateY(-2px);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-soft-sm {
+  box-shadow: var(--shadow-sm);
+}
+
