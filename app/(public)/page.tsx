@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getLatestPosts } from "@/lib/posts";
 import { PostCard } from "@/components/public/PostCard";
 import { AdSlot } from "@/components/public/AdSlot";
@@ -42,12 +44,21 @@ export default async function HomePage() {
 
         {rest.length > 0 ? (
           <section className="mt-8">
-            <h2 className="mb-6 flex items-center gap-2 text-lg font-bold text-ink border-b border-line pb-3">
-              <span className="star-divider" aria-hidden>
-                ★
-              </span>
-              Últimas publicações
-            </h2>
+            <div className="mb-6 flex items-center justify-between gap-2 border-b border-line pb-3">
+              <h2 className="flex items-center gap-2 text-lg font-bold text-ink">
+                <span className="star-divider" aria-hidden>
+                  ★
+                </span>
+                Últimas publicações
+              </h2>
+              <Link
+                href="/publicacoes"
+                className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-dark transition-colors"
+              >
+                Ver notícias
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((post) => (
                 <PostCard key={post.id} post={post} />

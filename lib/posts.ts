@@ -69,6 +69,28 @@ export async function getPostsByCategory(
   return { posts: data ?? [], total: count ?? 0 };
 }
 
+export async function getAllPosts(page = 1): Promise<{ posts: PostRow[]; total: number }> {
+  const nowIso = new Date().toISOString();
+  const from = (page - 1) * POSTS_PER_PAGE;
+  const to = from + POSTS_PER_PAGE - 1;
+
+  if (!isSupabaseConfigured()) {
+    const all = MOCK_POSTS.filter((p) => isLive(p, nowIso)).sort(sortByPublishedDesc);
+    return { posts: all.slice(from, to + 1), total: all.length };
+  }
+
+  const supabase = await createClient();
+  const { data, error, count } = await supabase
+    .from("posts")
+    .select("*", { count: "exact" })
+    .or(liveFilterOr(nowIso))
+    .order("published_at", { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+  return { posts: data ?? [], total: count ?? 0 };
+}
+
 export async function getAllLivePostsForSitemap(): Promise<
   Pick<PostRow, "category" | "slug" | "updated_at">[]
 > {
