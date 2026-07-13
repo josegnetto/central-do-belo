@@ -17,9 +17,13 @@ export function PostCard({
   const href = getPostUrlPath(post);
 
   return (
-    <article className="card-glow group flex flex-col overflow-hidden rounded-md border border-line bg-paper-muted/40">
-      <Link href={href} className="relative block overflow-hidden bg-paper-muted">
-        <span className="absolute inset-x-0 top-0 z-10 h-0.5 bg-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+    <article
+      className={`card-glow group flex flex-col overflow-hidden rounded-md border border-line bg-paper-muted/40 ${
+        size === "large" ? "card-glow-featured" : ""
+      }`}
+    >
+      <Link href={href} className="shine-sweep relative block overflow-hidden bg-paper-muted">
+        <span className="absolute inset-x-0 top-0 z-10 h-0.5 bg-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100" />
         <div
           className={
             size === "large"
@@ -34,7 +38,7 @@ export function PostCard({
               fill
               sizes={size === "large" ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
               priority={size === "large"}
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+              className="object-cover"
             />
           ) : null}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
@@ -48,8 +52,8 @@ export function PostCard({
           <h3
             className={
               size === "large"
-                ? "text-2xl md:text-3xl font-bold leading-tight text-ink group-hover:text-accent transition-colors"
-                : "text-lg font-bold leading-snug text-ink group-hover:text-accent transition-colors"
+                ? "text-2xl md:text-3xl font-bold leading-tight text-ink transition-colors duration-300 group-hover:text-accent group-active:text-accent"
+                : "text-lg font-bold leading-snug text-ink transition-colors duration-300 group-hover:text-accent group-active:text-accent"
             }
           >
             {post.title}

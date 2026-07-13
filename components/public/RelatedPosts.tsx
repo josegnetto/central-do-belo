@@ -1,5 +1,6 @@
 import type { PostRow } from "@/lib/supabase/types";
 import { PostCard } from "@/components/public/PostCard";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function RelatedPosts({ posts }: { posts: PostRow[] }) {
   if (posts.length === 0) return null;
@@ -13,8 +14,10 @@ export function RelatedPosts({ posts }: { posts: PostRow[] }) {
         Notícias relacionadas
       </h2>
       <div className="mt-5 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+        {posts.map((post, index) => (
+          <Reveal key={post.id} delay={index * 80}>
+            <PostCard post={post} />
+          </Reveal>
         ))}
       </div>
     </section>

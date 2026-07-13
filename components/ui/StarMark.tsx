@@ -1,6 +1,16 @@
+import { cn } from "@/lib/cn";
+
 export function StarMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden fill="none">
+    <svg
+      viewBox="0 0 100 100"
+      className={cn(
+        "transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-[18deg] group-hover:scale-110 group-active:rotate-[18deg] group-active:scale-95",
+        className,
+      )}
+      aria-hidden
+      fill="none"
+    >
       <defs>
         <linearGradient id="star-mark-gradient" x1="10" y1="5" x2="90" y2="95" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="var(--color-accent-dark)" />

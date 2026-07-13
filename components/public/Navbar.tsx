@@ -7,6 +7,7 @@ import { CATEGORIES } from "@/lib/constants";
 import { SearchBox } from "@/components/public/SearchBox";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Logo } from "@/components/ui/Logo";
+import { cn } from "@/lib/cn";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ export function Navbar() {
               {index > 0 ? <span className="star-divider text-xs select-none">★</span> : null}
               <Link
                 href={`/${category.slug}`}
-                className="text-sm font-medium text-ink-soft hover:text-accent transition-colors"
+                className="nav-underline py-1 text-sm font-medium text-ink-soft transition-colors duration-300 hover:text-accent"
               >
                 {category.label}
               </Link>
@@ -42,17 +43,28 @@ export function Navbar() {
           <ThemeToggle />
           <button
             type="button"
-            className="text-ink"
+            className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink transition-all duration-300 hover:bg-paper-muted hover:text-accent active:scale-90"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            <Menu
+              className={cn(
+                "absolute h-6 w-6 transition-all duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                open ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100",
+              )}
+            />
+            <X
+              className={cn(
+                "absolute h-6 w-6 transition-all duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                open ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0",
+              )}
+            />
           </button>
         </div>
       </div>
 
       {open ? (
-        <div className="md:hidden border-t border-line px-4 pb-4 pt-2">
+        <div className="menu-enter md:hidden border-t border-line px-4 pb-4 pt-2">
           <div className="mb-3">
             <SearchBox />
           </div>
@@ -62,7 +74,7 @@ export function Navbar() {
                 key={category.value}
                 href={`/${category.slug}`}
                 onClick={() => setOpen(false)}
-                className="rounded-sm px-2 py-2 text-sm font-medium text-ink-soft hover:bg-paper-muted"
+                className="rounded-sm px-2 py-2.5 text-sm font-medium text-ink-soft transition-all duration-300 hover:translate-x-1 hover:bg-paper-muted hover:text-accent active:translate-x-1 active:bg-paper-muted active:text-accent active:scale-[0.98]"
               >
                 {category.label}
               </Link>

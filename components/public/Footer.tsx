@@ -35,7 +35,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft hover:border-accent hover:text-accent transition-colors"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink-soft transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 hover:rotate-6 hover:border-accent hover:text-accent hover:shadow-[0_8px_20px_-6px_var(--color-accent-soft)] active:scale-90 active:border-accent active:text-accent"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -53,7 +53,7 @@ export function Footer() {
                 <li key={category.value}>
                   <Link
                     href={`/${category.slug}`}
-                    className="text-sm text-muted hover:text-accent transition-colors"
+                    className="nav-underline text-sm text-muted transition-colors duration-300 hover:text-accent active:text-accent"
                   >
                     {category.label}
                   </Link>
@@ -67,7 +67,7 @@ export function Footer() {
           <span>
             © {year} {SITE_NAME}. Portal independente, sem vínculo oficial com o clube.
           </span>
-          <span className="star-divider">★</span>
+          <span className="star-divider star-pulse">★</span>
         </div>
       </div>
     </footer>

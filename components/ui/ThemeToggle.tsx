@@ -29,6 +29,7 @@ function setTheme(theme: Theme) {
 
 export function ThemeToggle({ className }: { className?: string }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const showSun = theme === "dark";
 
   function toggle() {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -38,14 +39,25 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
-      aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"}
-      title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+      aria-label={showSun ? "Ativar modo claro" : "Ativar modo escuro"}
+      title={showSun ? "Modo claro" : "Modo escuro"}
       className={cn(
-        "flex h-8 w-8 shrink-0 items-center justify-center rounded-sm text-ink-soft hover:bg-paper-muted cursor-pointer",
+        "relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink-soft transition-all duration-300 hover:bg-paper-muted hover:text-accent hover:scale-110 active:scale-90 cursor-pointer",
         className,
       )}
     >
-      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <Sun
+        className={cn(
+          "absolute h-4 w-4 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+          showSun ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-0 opacity-0",
+        )}
+      />
+      <Moon
+        className={cn(
+          "absolute h-4 w-4 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+          showSun ? "-rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100",
+        )}
+      />
     </button>
   );
 }

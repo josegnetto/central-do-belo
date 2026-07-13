@@ -5,6 +5,7 @@ import { getLatestPosts } from "@/lib/posts";
 import { PostCard } from "@/components/public/PostCard";
 import { AdSlot } from "@/components/public/AdSlot";
 import { HeroPattern } from "@/components/public/HeroPattern";
+import { Reveal } from "@/components/ui/Reveal";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
 export const revalidate = 60;
@@ -33,7 +34,9 @@ export default async function HomePage() {
       <div className="relative overflow-hidden border-b border-line">
         <HeroPattern className="absolute inset-0 h-full w-full" />
         <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-6">
-          <PostCard post={featured} size="large" />
+          <Reveal>
+            <PostCard post={featured} size="large" />
+          </Reveal>
         </div>
       </div>
 
@@ -53,15 +56,17 @@ export default async function HomePage() {
               </h2>
               <Link
                 href="/publicacoes"
-                className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent hover:text-accent-dark transition-colors"
+                className="hover-pop group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent transition-colors duration-300 hover:text-accent-dark"
               >
                 Ver notícias
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1.5" />
               </Link>
             </div>
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((post) => (
-                <PostCard key={post.id} post={post} />
+              {rest.map((post, index) => (
+                <Reveal key={post.id} delay={(index % 3) * 80}>
+                  <PostCard post={post} />
+                </Reveal>
               ))}
             </div>
           </section>

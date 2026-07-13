@@ -15,6 +15,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0);
   --shadow-md: 0 1px 2px rgba(0, 0, 0, 0);
   --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
   color-scheme: dark;
 }
 
@@ -49,6 +51,10 @@
   --font-serif: var(--font-lora);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background:
     radial-gradient(ellipse 1200px 600px at 50% -10%, var(--color-paper-muted), transparent),
@@ -56,6 +62,18 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 ::selection {
@@ -101,15 +119,55 @@ body {
   color: var(--color-accent);
 }
 
+.star-pulse {
+  display: inline-block;
+  animation: star-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes star-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25) rotate(12deg);
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-pulse {
+    animation: none;
+  }
+}
+
 .card-glow {
-  box-shadow: var(--shadow-md);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth), transform 0.35s var(--ease-spring), z-index 0.35s step-end;
 }
 
 .card-glow:hover {
+  z-index: 20;
   border-color: var(--color-accent-soft);
-  box-shadow: var(--shadow-lg), 0 12px 40px -16px var(--color-accent-soft);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), 0 18px 40px -14px var(--color-accent-soft);
+  transform: translateY(-6px) scale(1.035);
+  transition: box-shadow 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth), transform 0.35s var(--ease-spring), z-index 0s;
+}
+
+.card-glow:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Variante para o destaque da home: mantém o brilho, mas quase sem crescer */
+.card-glow-featured:hover {
+  transform: translateY(-3px);
+}
+
+.card-glow-featured:active {
+  transform: translateY(-1px);
 }
 
 .shadow-soft {
@@ -118,5 +176,92 @@ body {
 
 .shadow-soft-sm {
   box-shadow: var(--shadow-sm);
+}
+
+/* Brilho que passa diagonalmente ao passar o mouse — usado em imagens e botões */
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.3) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.85s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.shine-sweep:hover::after,
+.shine-sweep:focus-visible::after {
+  transform: translateX(130%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-sweep::after {
+    display: none;
+  }
+}
+
+/* Crescimento suave tipo "mola" ao passar o mouse */
+.hover-pop {
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.hover-pop:hover {
+  transform: scale(1.06);
+}
+
+.hover-pop:active {
+  transform: scale(0.97);
+}
+
+/* Sublinhado que desliza da esquerda ao passar o mouse — links de navegação */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.nav-underline:hover::after,
+.nav-underline[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Entrada suave do menu mobile e de outros painéis que aparecem no toque */
+.menu-enter {
+  animation: menu-enter 0.3s var(--ease-smooth);
+}
+
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-enter {
+    animation: none;
+  }
 }
 

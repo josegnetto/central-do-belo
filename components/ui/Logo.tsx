@@ -39,7 +39,7 @@ interface LogoProps {
 export function Logo({ layout = "inline", size = "sm", href = "/", className }: LogoProps) {
   const content =
     layout === "stacked" ? (
-      <span className={cn("inline-flex flex-col items-center gap-1 leading-none", className)}>
+      <span className={cn("group inline-flex flex-col items-center gap-1 leading-none", className)}>
         <StarMark className={STAR_SIZE[size]} />
         <span className={cn("font-serif font-black tracking-tight text-ink", CDB_SIZE[size])}>
           {SITE_SHORT_NAME}
@@ -65,7 +65,7 @@ export function Logo({ layout = "inline", size = "sm", href = "/", className }: 
   if (!href) return content;
 
   return (
-    <Link href={href} className="inline-flex items-center shrink-0">
+    <Link href={href} className="group inline-flex items-center shrink-0">
       {content}
     </Link>
   );

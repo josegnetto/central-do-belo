@@ -5,6 +5,7 @@ import { getPostsByCategory, POSTS_PER_PAGE } from "@/lib/posts";
 import { PostCard } from "@/components/public/PostCard";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { AdSlot } from "@/components/public/AdSlot";
+import { Reveal } from "@/components/ui/Reveal";
 import Link from "next/link";
 
 export const revalidate = 60;
@@ -54,8 +55,10 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
       ) : (
         <>
           <div className="mt-8 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+            {posts.map((post, index) => (
+              <Reveal key={post.id} delay={(index % 3) * 80}>
+                <PostCard post={post} />
+              </Reveal>
             ))}
           </div>
 
@@ -65,7 +68,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
                 <Link
                   key={p}
                   href={p === 1 ? `/${category.slug}` : `/${category.slug}?page=${p}`}
-                  className={`flex h-9 w-9 items-center justify-center rounded-sm text-sm font-medium ${
+                  className={`hover-pop flex h-9 w-9 items-center justify-center rounded-sm text-sm font-medium transition-all duration-300 ${
                     p === page ? "bg-accent text-paper" : "border border-line text-ink-soft hover:border-accent hover:text-accent"
                   }`}
                 >
