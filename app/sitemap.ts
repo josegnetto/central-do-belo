@@ -15,6 +15,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "hourly" as const,
       priority: 0.8,
     })),
+    { url: `${siteUrl}/sobre`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${siteUrl}/contato`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${siteUrl}/politica-de-privacidade`, changeFrequency: "monthly", priority: 0.3 },
+    { url: `${siteUrl}/termos-de-uso`, changeFrequency: "monthly", priority: 0.3 },
   ];
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => {

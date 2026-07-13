@@ -79,7 +79,8 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
       </div>
 
       <div className="shadow-soft overflow-hidden rounded-md border border-line bg-paper">
-        <table className="w-full text-left text-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="border-b border-line bg-paper-muted text-xs uppercase tracking-wide text-muted">
             <tr>
               <th className="px-4 py-3 font-medium">Título</th>
@@ -125,7 +126,8 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
               ))
             )}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </AdminShell>
   );

@@ -44,22 +44,47 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
-              Editorias
-            </h4>
-            <ul className="mt-4 flex flex-col items-center gap-2.5 md:items-start">
-              {CATEGORIES.map((category) => (
-                <li key={category.value}>
-                  <Link
-                    href={`/${category.slug}`}
-                    className="nav-underline text-sm text-muted transition-colors duration-300 hover:text-accent active:text-accent"
-                  >
-                    {category.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-16">
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                Editorias
+              </h4>
+              <ul className="mt-4 flex flex-col items-center gap-2.5 md:items-start">
+                {CATEGORIES.map((category) => (
+                  <li key={category.value}>
+                    <Link
+                      href={`/${category.slug}`}
+                      className="nav-underline text-sm text-muted transition-colors duration-300 hover:text-accent active:text-accent"
+                    >
+                      {category.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+                Institucional
+              </h4>
+              <ul className="mt-4 flex flex-col items-center gap-2.5 md:items-start">
+                {[
+                  { label: "Sobre", href: "/sobre" },
+                  { label: "Contato", href: "/contato" },
+                  { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+                  { label: "Termos de Uso", href: "/termos-de-uso" },
+                ].map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="nav-underline text-sm text-muted transition-colors duration-300 hover:text-accent active:text-accent"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

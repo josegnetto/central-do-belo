@@ -52,7 +52,7 @@ export default async function AllPostsPage({ searchParams }: PageProps) {
                 <Link
                   key={p}
                   href={p === 1 ? "/publicacoes" : `/publicacoes?page=${p}`}
-                  className={`hover-pop flex h-9 w-9 items-center justify-center rounded-sm text-sm font-medium transition-all duration-300 ${
+                  className={`hover-pop flex h-11 w-11 items-center justify-center rounded-sm text-sm font-medium transition-all duration-300 ${
                     p === page ? "bg-accent text-paper" : "border border-line text-ink-soft hover:border-accent hover:text-accent"
                   }`}
                 >
