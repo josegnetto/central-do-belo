@@ -265,3 +265,24 @@ body {
   }
 }
 
+/* Flutuação suave e contínua — usada no escudo do banner da home */
+.float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-slow {
+    animation: none;
+  }
+}
+
