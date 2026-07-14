@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CATEGORIES, SITE_DESCRIPTION, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { CATEGORIES, DEVELOPER, SITE_DESCRIPTION, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
 import { Logo } from "@/components/ui/Logo";
-import { InstagramIcon, XIcon } from "@/components/icons/BrandIcons";
+import { GitHubIcon, InstagramIcon, XIcon } from "@/components/icons/BrandIcons";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -88,11 +88,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-2 border-t border-line pt-6 text-xs text-muted md:flex-row md:justify-between">
+        <div className="mt-12 flex flex-col items-center gap-3 border-t border-line pt-6 text-xs text-muted md:flex-row md:justify-between">
           <span>
             © {year} {SITE_NAME}. Portal independente, sem vínculo oficial com o clube.
           </span>
-          <span className="star-divider star-pulse">★</span>
+          <a
+            href={DEVELOPER.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-1.5 transition-colors duration-300 hover:text-accent"
+          >
+            <GitHubIcon className="h-3.5 w-3.5" />
+            Desenvolvido por <span className="font-semibold">{DEVELOPER.name}</span>
+          </a>
         </div>
       </div>
     </footer>

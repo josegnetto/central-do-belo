@@ -68,3 +68,8 @@ export const SOCIAL_LINKS = {
   x: "https://x.com/centraldobeloo",
   handle: "@centraldobeloo",
 };
+
+export const DEVELOPER = {
+  name: "josegnetto",
+  github: "https://github.com/josegnetto",
+};

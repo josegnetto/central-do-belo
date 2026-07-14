@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ImagePlus, Loader2, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { compressImage } from "@/lib/image-compress";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
@@ -35,11 +36,14 @@ export function ImageUploader({
     setUploading(true);
     setError(null);
 
+    // otimiza no navegador antes de subir (máx. 2000px, alta qualidade)
+    const optimized = await compressImage(file);
+
     const supabase = createClient();
-    const extension = file.name.split(".").pop() || "jpg";
+    const extension = optimized.name.split(".").pop() || "jpg";
     const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${extension}`;
 
-    const { error: uploadError } = await supabase.storage.from("covers").upload(path, file, {
+    const { error: uploadError } = await supabase.storage.from("covers").upload(path, optimized, {
       cacheControl: "3600",
       upsert: false,
     });
