@@ -5,6 +5,7 @@ import { getLatestPosts } from "@/lib/posts";
 import { PostCard } from "@/components/public/PostCard";
 import { AdSlot } from "@/components/public/AdSlot";
 import { HeroPattern } from "@/components/public/HeroPattern";
+import { HomeBanner } from "@/components/public/HomeBanner";
 import { Reveal } from "@/components/ui/Reveal";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
@@ -20,17 +21,22 @@ export default async function HomePage() {
 
   if (!featured) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-20 text-center md:px-6">
-        <h1 className="text-2xl font-bold text-ink">Nenhuma publicação ainda</h1>
-        <p className="mt-2 text-muted">
-          Assim que o primeiro conteúdo for publicado no painel administrativo, ele aparecerá aqui.
-        </p>
+      <div>
+        <HomeBanner />
+        <div className="mx-auto max-w-6xl px-4 py-20 text-center md:px-6">
+          <h1 className="text-2xl font-bold text-ink">Nenhuma publicação ainda</h1>
+          <p className="mt-2 text-muted">
+            Assim que o primeiro conteúdo for publicado no painel administrativo, ele aparecerá aqui.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
     <div>
+      <HomeBanner />
+
       <div className="relative overflow-hidden border-b border-line">
         <HeroPattern className="absolute inset-0 h-full w-full" />
         <div className="relative mx-auto max-w-6xl px-4 py-10 md:px-6">

@@ -38,7 +38,7 @@ export function buildNewsArticleJsonLd(post: PostRow) {
       name: SITE_NAME,
       logo: {
         "@type": "ImageObject",
-        url: `${getSiteUrl()}/logo.png`,
+        url: `${getSiteUrl()}/logobelo.png`,
       },
     },
     author: {
