@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "central-do-belo",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-15",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  }
+  // Variáveis de ambiente (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  // NEXT_PUBLIC_SITE_URL, NEXT_PUBLIC_GA_ID, NEXT_PUBLIC_GSC_VERIFICATION,
+  // NEXT_PUBLIC_ADSENSE_CLIENT_ID) NÃO ficam aqui — configure-as em:
+  //   - Produção: painel da Cloudflare > Workers & Pages > este projeto > Settings > Variables
+  //   - Local (wrangler dev/preview): arquivo .dev.vars (não commitado)
+  //   - Local (next dev): .env.local (já existente, sem mudanças)
+}
