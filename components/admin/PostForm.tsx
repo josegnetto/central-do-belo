@@ -7,7 +7,7 @@ import { Eye } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 import type { PostRow } from "@/lib/supabase/types";
 import { slugFromTitle } from "@/lib/slug";
-import { formatDateTimeLocal } from "@/lib/format";
+import { formatDateTimeLocal, saoPauloLocalToUtcIso } from "@/lib/format";
 import type { PostFormPayload } from "@/lib/validation";
 import { createPost, updatePost } from "@/app/admin/actions";
 import { Input } from "@/components/ui/Input";
@@ -79,7 +79,7 @@ export function PostForm({ post }: { post?: PostRow }) {
     return isEditing && post ? updatePost(post.id, payload) : createPost(payload);
   }
 
-  const scheduledAtIso = scheduledAt ? new Date(scheduledAt).toISOString() : null;
+  const scheduledAtIso = saoPauloLocalToUtcIso(scheduledAt);
 
   function handleSave(action: SaveAction) {
     setError(null);
@@ -223,7 +223,8 @@ export function PostForm({ post }: { post?: PostRow }) {
 
           <div>
             <label htmlFor="scheduledAt" className="mb-1 block text-sm font-medium text-ink-soft">
-              Data/hora de agendamento
+              Data/hora de agendamento{" "}
+              <span className="font-normal text-muted">(horário de Brasília)</span>
             </label>
             <Input
               id="scheduledAt"
