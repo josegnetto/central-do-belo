@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { generateHTML } from "@tiptap/html";
 import { requireAdminUser } from "@/lib/auth";
 import { getPostByIdForAdmin } from "@/lib/posts";
 import { getCategoryByValue } from "@/lib/constants";
-import { tiptapExtensions } from "@/lib/tiptap-extensions";
+import { renderTiptapContent } from "@/lib/tiptap-render";
 import { formatDate } from "@/lib/format";
 import { Badge } from "@/components/ui/Badge";
 
@@ -23,7 +22,7 @@ export default async function PreviewPostPage({ params }: PageProps) {
   if (!post) notFound();
 
   const category = getCategoryByValue(post.category);
-  const html = generateHTML(post.content, tiptapExtensions);
+  const html = renderTiptapContent(post.content);
 
   return (
     <div className="min-h-full bg-paper">

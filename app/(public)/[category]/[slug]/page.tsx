@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { generateHTML } from "@tiptap/html";
 import { getCategoryBySlug } from "@/lib/constants";
 import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
-import { tiptapExtensions } from "@/lib/tiptap-extensions";
+import { renderTiptapContent } from "@/lib/tiptap-render";
 import { buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
 import { formatDate } from "@/lib/format";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
@@ -61,10 +60,8 @@ export default async function PostPage({ params }: PageProps) {
   const post = await getPostBySlug(category.value, slug);
   if (!post) notFound();
 
-  const [related, html] = await Promise.all([
-    getRelatedPosts(post),
-    Promise.resolve(generateHTML(post.content, tiptapExtensions)),
-  ]);
+  const related = await getRelatedPosts(post);
+  const html = renderTiptapContent(post.content);
 
   const jsonLd = buildNewsArticleJsonLd(post);
 
