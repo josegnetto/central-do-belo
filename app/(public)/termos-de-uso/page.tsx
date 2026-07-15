@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
+import { StarMark } from "@/components/ui/StarMark";
 import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -13,9 +14,7 @@ export default function TermosDeUsoPage() {
     <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
       <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: "Termos de Uso" }]} />
       <h1 className="mt-3 flex items-center gap-2 text-3xl font-bold text-ink">
-        <span className="star-divider" aria-hidden>
-          ★
-        </span>
+        <StarMark className="h-6 w-6" />
         Termos de Uso
       </h1>
       <p className="mt-2 text-sm text-muted">Última atualização: 13 de julho de 2026</p>

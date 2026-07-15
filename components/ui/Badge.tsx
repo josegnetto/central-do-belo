@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { StarMark } from "@/components/ui/StarMark";
 
 type Tone = "accent" | "neutral" | "muted";
 
@@ -27,7 +28,7 @@ export function Badge({
         className,
       )}
     >
-      {star ? <span aria-hidden>★</span> : null}
+      {star ? <StarMark variant="solid" className="h-2.5 w-2.5" /> : null}
       {children}
     </span>
   );

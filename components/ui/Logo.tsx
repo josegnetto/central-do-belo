@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StarMark } from "@/components/ui/StarMark";
+import { MainStar } from "@/components/ui/MainStar";
 import { SITE_NAME, SITE_SHORT_NAME } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 
@@ -40,7 +40,7 @@ export function Logo({ layout = "inline", size = "sm", href = "/", className }: 
   const content =
     layout === "stacked" ? (
       <span className={cn("group inline-flex flex-col items-center gap-1 leading-none", className)}>
-        <StarMark className={STAR_SIZE[size]} />
+        <MainStar className={STAR_SIZE[size]} />
         <span className={cn("font-serif font-black tracking-tight text-ink", CDB_SIZE[size])}>
           {SITE_SHORT_NAME}
         </span>
@@ -55,7 +55,7 @@ export function Logo({ layout = "inline", size = "sm", href = "/", className }: 
       </span>
     ) : (
       <span className={cn("inline-flex items-center gap-2", className)}>
-        <StarMark className={STAR_SIZE[size]} />
+        <MainStar className={STAR_SIZE[size]} />
         <span className={cn("font-serif font-bold tracking-tight text-ink", INLINE_TEXT_SIZE[size])}>
           {SITE_NAME}
         </span>

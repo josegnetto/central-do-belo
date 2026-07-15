@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ClipboardList, Newspaper, User } from "lucide-react";
 import { StarMark } from "@/components/ui/StarMark";
+import { MainStar } from "@/components/ui/MainStar";
 import { InstagramIcon, XIcon } from "@/components/icons/BrandIcons";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_SHORT_NAME, SOCIAL_LINKS } from "@/lib/constants";
 
@@ -26,12 +27,12 @@ export function HomeBanner() {
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 py-14 md:grid-cols-[1.15fr_1fr] md:gap-8 md:px-6 md:py-20">
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
           <span className="star-divider flex items-center gap-2 text-xs font-bold uppercase tracking-[0.3em]">
-            <span aria-hidden>★</span> Seu portal do Belo
+            <StarMark className="h-3 w-3" /> Seu portal do Belo
           </span>
 
           <div className="mt-10 flex flex-col items-center gap-1 md:mt-11 md:items-start">
             <span className="relative font-serif text-5xl font-black tracking-tight text-ink md:text-6xl">
-              <StarMark className="absolute -top-7 left-1/2 h-6 w-6 -translate-x-1/2 md:-top-8 md:h-7 md:w-7" />
+              <MainStar className="absolute -top-8 left-1/2 h-8 w-8 -translate-x-1/2 md:-top-9 md:h-9 md:w-9" />
               {SITE_SHORT_NAME}
             </span>
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">
@@ -88,7 +89,7 @@ export function HomeBanner() {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center py-4">
+        <div className="relative hidden items-center justify-center py-4 md:flex">
           <div
             className="absolute h-56 w-56 rounded-full bg-accent/25 blur-3xl md:h-72 md:w-72"
             aria-hidden

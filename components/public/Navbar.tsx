@@ -7,6 +7,7 @@ import { CATEGORIES } from "@/lib/constants";
 import { SearchBox } from "@/components/public/SearchBox";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Logo } from "@/components/ui/Logo";
+import { StarMark } from "@/components/ui/StarMark";
 import { cn } from "@/lib/cn";
 
 export function Navbar() {
@@ -20,7 +21,7 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-5">
           {CATEGORIES.map((category, index) => (
             <span key={category.value} className="flex items-center gap-5">
-              {index > 0 ? <span className="star-divider text-xs select-none">★</span> : null}
+              {index > 0 ? <StarMark className="h-3 w-3" /> : null}
               <Link
                 href={`/${category.slug}`}
                 className="nav-underline py-1 text-sm font-medium text-ink-soft transition-colors duration-300 hover:text-accent"

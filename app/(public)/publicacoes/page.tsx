@@ -5,6 +5,7 @@ import { PostCard } from "@/components/public/PostCard";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { AdSlot } from "@/components/public/AdSlot";
 import { Reveal } from "@/components/ui/Reveal";
+import { StarMark } from "@/components/ui/StarMark";
 
 export const revalidate = 60;
 
@@ -27,9 +28,7 @@ export default async function AllPostsPage({ searchParams }: PageProps) {
     <div className="mx-auto max-w-6xl px-4 py-8 md:px-6">
       <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: "Todas as publicações" }]} />
       <h1 className="mt-3 flex items-center gap-2 text-3xl font-bold text-ink">
-        <span className="star-divider" aria-hidden>
-          ★
-        </span>
+        <StarMark className="h-6 w-6" />
         Todas as publicações
       </h1>
       <p className="mt-1 text-muted">Notícias, raio-x, análises e indicações de contratação, tudo em um só lugar.</p>

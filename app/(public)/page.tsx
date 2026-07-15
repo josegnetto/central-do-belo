@@ -7,6 +7,7 @@ import { AdSlot } from "@/components/public/AdSlot";
 import { HeroPattern } from "@/components/public/HeroPattern";
 import { HomeBanner } from "@/components/public/HomeBanner";
 import { Reveal } from "@/components/ui/Reveal";
+import { StarMark } from "@/components/ui/StarMark";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
 export const revalidate = 60;
@@ -55,9 +56,7 @@ export default async function HomePage() {
           <section className="mt-8">
             <div className="mb-6 flex items-center justify-between gap-2 border-b border-line pb-3">
               <h2 className="flex items-center gap-2 text-lg font-bold text-ink">
-                <span className="star-divider" aria-hidden>
-                  ★
-                </span>
+                <StarMark className="h-4 w-4" />
                 Últimas publicações
               </h2>
               <Link

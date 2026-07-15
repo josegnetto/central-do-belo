@@ -6,6 +6,7 @@ import { PostCard } from "@/components/public/PostCard";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { AdSlot } from "@/components/public/AdSlot";
 import { Reveal } from "@/components/ui/Reveal";
+import { StarMark } from "@/components/ui/StarMark";
 import Link from "next/link";
 
 export const revalidate = 60;
@@ -43,9 +44,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     <div className="mx-auto max-w-6xl px-4 py-8 md:px-6">
       <Breadcrumbs items={[{ label: "Início", href: "/" }, { label: category.label }]} />
       <h1 className="mt-3 flex items-center gap-2 text-3xl font-bold text-ink">
-        <span className="star-divider" aria-hidden>
-          ★
-        </span>
+        <StarMark className="h-6 w-6" />
         {category.label}
       </h1>
       <p className="mt-1 text-muted">{category.description}</p>
