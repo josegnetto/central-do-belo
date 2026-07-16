@@ -7,6 +7,7 @@ import { getPostByIdForAdmin } from "@/lib/posts";
 import { getCategoryByValue } from "@/lib/constants";
 import { renderTiptapContent } from "@/lib/tiptap-render";
 import { formatDate } from "@/lib/format";
+import { coverObjectPosition } from "@/lib/cover-framing";
 import { Badge } from "@/components/ui/Badge";
 
 export const metadata: Metadata = { title: "Pré-visualização" };
@@ -44,7 +45,13 @@ export default async function PreviewPostPage({ params }: PageProps) {
         </div>
         {post.cover_image_url ? (
           <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm">
-            <Image src={post.cover_image_url} alt={post.title} fill className="object-cover" />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              fill
+              className="object-cover"
+              style={{ objectPosition: coverObjectPosition(post.cover_image_url) }}
+            />
           </div>
         ) : null}
         <div

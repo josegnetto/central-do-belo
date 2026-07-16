@@ -4,6 +4,7 @@ import type { PostRow } from "@/lib/supabase/types";
 import { getCategoryByValue } from "@/lib/constants";
 import { getPostUrlPath } from "@/lib/seo";
 import { formatDate } from "@/lib/format";
+import { coverObjectPosition } from "@/lib/cover-framing";
 import { Badge } from "@/components/ui/Badge";
 
 export function PostCard({
@@ -39,6 +40,7 @@ export function PostCard({
               sizes={size === "large" ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}
               priority={size === "large"}
               className="object-cover"
+              style={{ objectPosition: coverObjectPosition(post.cover_image_url) }}
             />
           ) : null}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />

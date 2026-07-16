@@ -6,6 +6,7 @@ import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { renderTiptapContent } from "@/lib/tiptap-render";
 import { buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
 import { formatDate } from "@/lib/format";
+import { coverObjectPosition, stripCoverFraming } from "@/lib/cover-framing";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { ShareButtons } from "@/components/public/ShareButtons";
 import { RelatedPosts } from "@/components/public/RelatedPosts";
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = post.seo_title || post.title;
   const description = post.seo_description || post.excerpt || undefined;
   const url = getPostAbsoluteUrl(post);
+  const coverUrl = post.cover_image_url ? stripCoverFraming(post.cover_image_url) : null;
 
   return {
     title,
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url,
-      images: post.cover_image_url ? [{ url: post.cover_image_url }] : undefined,
+      images: coverUrl ? [{ url: coverUrl }] : undefined,
       publishedTime: post.published_at ?? undefined,
       modifiedTime: post.updated_at,
     },
@@ -47,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title,
       description,
-      images: post.cover_image_url ? [post.cover_image_url] : undefined,
+      images: coverUrl ? [coverUrl] : undefined,
     },
   };
 }
@@ -99,7 +101,14 @@ export default async function PostPage({ params }: PageProps) {
 
       {post.cover_image_url ? (
         <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm">
-          <Image src={post.cover_image_url} alt={post.title} fill className="object-cover" priority />
+          <Image
+            src={post.cover_image_url}
+            alt={post.title}
+            fill
+            className="object-cover"
+            style={{ objectPosition: coverObjectPosition(post.cover_image_url) }}
+            priority
+          />
         </div>
       ) : null}
 

@@ -1,6 +1,7 @@
 import type { PostRow } from "@/lib/supabase/types";
 import { getCategoryByValue } from "@/lib/constants";
 import { SITE_NAME } from "@/lib/constants";
+import { stripCoverFraming } from "@/lib/cover-framing";
 
 export function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
@@ -25,7 +26,7 @@ export function buildNewsArticleJsonLd(post: PostRow) {
     "@type": "NewsArticle",
     headline: post.seo_title || post.title,
     description: post.seo_description || post.excerpt || undefined,
-    image: post.cover_image_url ? [post.cover_image_url] : undefined,
+    image: post.cover_image_url ? [stripCoverFraming(post.cover_image_url)] : undefined,
     datePublished: post.published_at ?? post.created_at,
     dateModified: post.updated_at,
     articleSection: category.label,
