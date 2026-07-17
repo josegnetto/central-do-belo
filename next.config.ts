@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
+  // Remove o header "X-Powered-By: Next.js" (higiene básica de segurança/SEO,
+  // não expõe detalhe de stack desnecessário).
+  poweredByHeader: false,
   images: {
     // Cloudflare Pages/Workers não tem o otimizador de imagem nativo da Vercel.
     // A alternativa (Cloudflare Images) é um serviço pago à parte, configurado

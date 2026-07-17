@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Política de Privacidade",
   description:
     "Saiba como o Central do Belo coleta, usa e protege seus dados, em conformidade com a LGPD.",
+  alternates: { canonical: "/politica-de-privacidade" },
 };
 
 export default function PoliticaDePrivacidadePage() {

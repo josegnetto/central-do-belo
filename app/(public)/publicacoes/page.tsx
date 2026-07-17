@@ -12,6 +12,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Todas as publicações",
   description: "Todas as notícias, raio-x, análises e indicações de contratação do Botafogo-PB.",
+  alternates: { canonical: "/publicacoes" },
 };
 
 interface PageProps {

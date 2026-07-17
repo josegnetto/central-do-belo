@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Sobre",
   description:
     "Conheça o Central do Belo: portal independente dedicado à cobertura completa do Botafogo-PB.",
+  alternates: { canonical: "/sobre" },
 };
 
 export default function SobrePage() {

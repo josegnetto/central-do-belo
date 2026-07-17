@@ -7,6 +7,7 @@ import { SITE_NAME } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Termos de Uso",
   description: "Condições de uso do portal Central do Belo.",
+  alternates: { canonical: "/termos-de-uso" },
 };
 
 export default function TermosDeUsoPage() {

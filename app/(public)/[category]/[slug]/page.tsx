@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getCategoryBySlug } from "@/lib/constants";
 import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { renderTiptapContent } from "@/lib/tiptap-render";
-import { buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
+import { buildBreadcrumbJsonLd, buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
 import { formatDate } from "@/lib/format";
 import { coverObjectPosition, stripCoverFraming } from "@/lib/cover-framing";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
@@ -66,12 +66,21 @@ export default async function PostPage({ params }: PageProps) {
   const html = renderTiptapContent(post.content);
 
   const jsonLd = buildNewsArticleJsonLd(post);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { label: "Início", path: "/" },
+    { label: category.label, path: `/${category.slug}` },
+    { label: post.title },
+  ]);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-8 md:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <Breadcrumbs

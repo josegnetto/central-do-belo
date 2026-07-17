@@ -7,6 +7,7 @@ import { SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contato",
   description: "Fale com a equipe do Central do Belo: sugestões de pauta, correções e parcerias.",
+  alternates: { canonical: "/contato" },
 };
 
 export default function ContatoPage() {
