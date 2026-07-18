@@ -19,6 +19,7 @@ const lora = Lora({
 });
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
@@ -87,13 +88,34 @@ export default function RootLayout({
             <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
           </>
         ) : null}
-        {gaId ? <link rel="preconnect" href="https://www.googletagmanager.com" /> : null}
+        {gaId || gaMeasurementId ? (
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+        ) : null}
         {adsenseClientId ? (
           <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
             crossOrigin="anonymous"
           />
+        ) : null}
+        {gaMeasurementId ? (
+          <>
+            {/* Google tag (gtag.js) */}
+            <Script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', '${gaMeasurementId}');
+              `}
+            </Script>
+          </>
         ) : null}
       </head>
       <body className="min-h-full flex flex-col bg-paper text-ink antialiased">
