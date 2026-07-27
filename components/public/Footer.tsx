@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { CATEGORIES, DEVELOPER, SITE_DESCRIPTION, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import Image from "next/image";
+import {
+  CATEGORIES,
+  DEVELOPER,
+  PARTNERS,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SOCIAL_LINKS,
+} from "@/lib/constants";
 import { Logo } from "@/components/ui/Logo";
 import { GitHubIcon, InstagramIcon, XIcon } from "@/components/icons/BrandIcons";
 
@@ -88,7 +96,50 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-3 border-t border-line pt-6 text-xs text-muted md:flex-row md:justify-between">
+        <div className="mt-12 flex flex-col items-center border-t border-line pt-8 text-center md:items-start md:text-left">
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-ink-soft">
+            Parceiros
+          </h4>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+            {PARTNERS.map((partner) => {
+              const content = (
+                <span className="flex h-16 w-32 items-center justify-center rounded-md bg-white p-2.5 shadow-sm ring-1 ring-line/60 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-hover:shadow-[0_10px_24px_-8px_var(--color-accent-soft)] group-active:scale-95">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    width={200}
+                    height={100}
+                    className="h-full w-full object-contain"
+                  />
+                </span>
+              );
+
+              if (!partner.instagram) {
+                return (
+                  <div key={partner.name} className="group" title={partner.name}>
+                    {content}
+                  </div>
+                );
+              }
+
+              return (
+                <a
+                  key={partner.name}
+                  href={partner.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Instagram de ${partner.name}`}
+                  title={partner.name}
+                  className="group"
+                >
+                  {content}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3 border-t border-line pt-6 text-xs text-muted md:flex-row md:justify-between">
           <span>
             © {year} {SITE_NAME}. Portal independente, sem vínculo oficial com o clube.
           </span>

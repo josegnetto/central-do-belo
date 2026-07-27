@@ -73,3 +73,28 @@ export const DEVELOPER = {
   name: "josegnetto",
   github: "https://github.com/josegnetto",
 };
+
+export interface Partner {
+  name: string;
+  logo: string;
+  instagram?: string;
+}
+
+export const PARTNERS: Partner[] = [
+  { name: "Impacto Descartáveis", logo: "/parceiros/impacto1.png" },
+  {
+    name: "Equilíbrio",
+    logo: "/parceiros/equilibrio2.png",
+    instagram: "https://instagram.com/corretoraequilibrio",
+  },
+  {
+    name: "RD Motos",
+    logo: "/parceiros/rdmotors.png",
+    instagram: "https://instagram.com/rd.motos",
+  },
+  {
+    name: "Feijoada da Tonha",
+    logo: "/parceiros/feijoadadatonha3.png",
+    instagram: "https://instagram.com/feijoada.datonha",
+  },
+];
