@@ -6,12 +6,14 @@ import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { AdSlot } from "@/components/public/AdSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { StarMark } from "@/components/ui/StarMark";
+import { getSiteUrl } from "@/lib/seo";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Todas as publicações",
   description: "Todas as notícias, raio-x, análises e indicações de contratação do Botafogo-PB.",
+  alternates: { canonical: `${getSiteUrl()}/publicacoes` },
 };
 
 interface PageProps {

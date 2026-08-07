@@ -9,11 +9,13 @@ import { HomeBanner } from "@/components/public/HomeBanner";
 import { Reveal } from "@/components/ui/Reveal";
 import { StarMark } from "@/components/ui/StarMark";
 import { SITE_DESCRIPTION } from "@/lib/constants";
+import { getSiteUrl } from "@/lib/seo";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
+  alternates: { canonical: getSiteUrl() },
 };
 
 export default async function HomePage() {

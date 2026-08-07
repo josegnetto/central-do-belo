@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { generateHTML } from "@tiptap/html";
-import { getCategoryBySlug } from "@/lib/constants";
+import Link from "next/link";
+import { EDITORIAL_BYLINE, getCategoryBySlug } from "@/lib/constants";
 import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { tiptapExtensions } from "@/lib/tiptap-extensions";
 import { buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
@@ -95,7 +96,15 @@ export default async function PostPage({ params }: PageProps) {
 
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-y border-line py-3 text-sm text-muted">
         <span>
-          {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de leitura
+          Por{" "}
+          <Link
+            href="/politica-editorial"
+            className="font-semibold text-ink-soft transition-colors hover:text-accent"
+          >
+            {EDITORIAL_BYLINE}
+          </Link>{" "}
+          · {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de
+          leitura
         </span>
         <ShareButtons url={getPostAbsoluteUrl(post)} title={post.title} />
       </div>

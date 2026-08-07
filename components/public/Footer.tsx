@@ -71,6 +71,7 @@ export function Footer() {
                 {[
                   { label: "Sobre", href: "/sobre" },
                   { label: "Contato", href: "/contato" },
+                  { label: "Política Editorial", href: "/politica-editorial" },
                   { label: "Política de Privacidade", href: "/politica-de-privacidade" },
                   { label: "Termos de Uso", href: "/termos-de-uso" },
                 ].map((item) => (

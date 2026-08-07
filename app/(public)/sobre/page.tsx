@@ -3,11 +3,13 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { StarMark } from "@/components/ui/StarMark";
 import { SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { getSiteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Sobre",
   description:
     "Conheça o Central do Belo: portal independente dedicado à cobertura completa do Botafogo-PB.",
+  alternates: { canonical: `${getSiteUrl()}/sobre` },
 };
 
 export default function SobrePage() {
@@ -47,6 +49,12 @@ export default function SobrePage() {
           Somos um veículo <strong>independente</strong>, sem vínculo oficial com o Botafogo-PB. As
           opiniões publicadas aqui são de responsabilidade dos nossos autores e não representam o
           clube.
+        </p>
+        <p>
+          Todo o conteúdo publicado aqui é escrito e revisado por pessoas. Nossa{" "}
+          <Link href="/politica-editorial">Política Editorial</Link> detalha como apuramos as
+          informações, como creditamos fontes, como separamos notícia de opinião e o que fazemos
+          quando erramos.
         </p>
         <p>
           Quer falar com a gente? Visite a página de{" "}

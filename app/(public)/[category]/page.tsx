@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { AdSlot } from "@/components/public/AdSlot";
 import { Reveal } from "@/components/ui/Reveal";
 import { StarMark } from "@/components/ui/StarMark";
+import { getSiteUrl } from "@/lib/seo";
 import Link from "next/link";
 
 export const revalidate = 60;
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: category.label,
     description: category.description,
+    alternates: { canonical: `${getSiteUrl()}/${category.slug}` },
   };
 }
 

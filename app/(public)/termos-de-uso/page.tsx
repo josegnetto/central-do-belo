@@ -3,10 +3,12 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { StarMark } from "@/components/ui/StarMark";
 import { SITE_NAME } from "@/lib/constants";
+import { getSiteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Termos de Uso",
   description: "Condições de uso do portal Central do Belo.",
+  alternates: { canonical: `${getSiteUrl()}/termos-de-uso` },
 };
 
 export default function TermosDeUsoPage() {
