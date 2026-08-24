@@ -205,6 +205,7 @@ export interface AdminPostFilters {
 
 export async function listPostsForAdmin(filters: AdminPostFilters = {}): Promise<PostRow[]> {
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     let items = [...MOCK_POSTS];
     if (filters.status) items = items.filter((p) => p.status === filters.status);
     if (filters.category) items = items.filter((p) => p.category === filters.category);
@@ -229,6 +230,7 @@ export async function listPostsForAdmin(filters: AdminPostFilters = {}): Promise
 
 export async function getPostByIdForAdmin(id: string): Promise<PostRow | null> {
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return null;
     return MOCK_POSTS.find((p) => p.id === id) ?? null;
   }
 

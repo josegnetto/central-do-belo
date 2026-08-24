@@ -265,6 +265,19 @@ body {
   }
 }
 
+/* O escudo do Belo é quase todo preto, e o fundo do tema escuro é #0a0a0a:
+   sem tratamento, o corpo do escudo some e só sobram o contorno branco e a
+   estrela flutuando. No escuro usamos um halo claro para recortar a silhueta;
+   no claro, uma sombra escura comum, que ali já resolve. */
+.crest-relief {
+  filter: drop-shadow(0 0 22px rgba(244, 242, 239, 0.22))
+    drop-shadow(0 24px 42px rgba(0, 0, 0, 0.55));
+}
+
+:root[data-theme="light"] .crest-relief {
+  filter: drop-shadow(0 24px 42px rgba(15, 15, 15, 0.3));
+}
+
 /* Flutuação suave e contínua — usada no escudo do banner da home */
 .float-slow {
   animation: float-slow 5s ease-in-out infinite;
