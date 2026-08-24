@@ -45,7 +45,13 @@ export default async function PreviewPostPage({ params }: PageProps) {
         </div>
         {post.cover_image_url ? (
           <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm">
-            <Image src={post.cover_image_url} alt={post.title} fill className="object-cover" />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              fill
+              sizes="(min-width: 768px) 768px, 100vw"
+              className="object-cover"
+            />
           </div>
         ) : null}
         <div

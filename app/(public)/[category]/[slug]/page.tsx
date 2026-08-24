@@ -111,7 +111,14 @@ export default async function PostPage({ params }: PageProps) {
 
       {post.cover_image_url ? (
         <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm">
-          <Image src={post.cover_image_url} alt={post.title} fill className="object-cover" priority />
+          <Image
+            src={post.cover_image_url}
+            alt={post.title}
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-cover"
+            priority
+          />
         </div>
       ) : null}
 

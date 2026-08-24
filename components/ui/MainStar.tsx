@@ -11,8 +11,8 @@ export function MainStar({ className }: { className?: string }) {
     <Image
       src="/estrela.png"
       alt=""
-      width={500}
-      height={500}
+      width={350}
+      height={350}
       className={cn(
         "select-none object-contain transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-[18deg] group-hover:scale-110 group-active:rotate-[18deg] group-active:scale-95",
         className,

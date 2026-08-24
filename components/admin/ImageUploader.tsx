@@ -108,7 +108,13 @@ export function ImageUploader({
               isDraggingOver ? "border-accent" : "border-line",
             )}
           >
-            <Image src={value} alt="Capa da publicação" fill className="object-cover" />
+            <Image
+              src={value}
+              alt="Capa da publicação"
+              fill
+              sizes="(min-width: 768px) 640px, 100vw"
+              className="object-cover"
+            />
             <button
               type="button"
               onClick={() => onChange(null)}
