@@ -14,6 +14,42 @@ export function formatDate(iso: string): string {
   }).format(new Date(iso));
 }
 
+/**
+ * "há 12 min", "há 3 h", "ontem", "há 4 dias" — e a data cheia quando passa de
+ * uma semana. É o sinal de frescor que todo portal de notícia usa: entre duas
+ * manchetes, o leitor decide o que ler pelo quão recente é.
+ *
+ * Renderizado no servidor, então acompanha o `revalidate` da página (60s na
+ * home). Não é um relógio ao vivo, e não precisa ser.
+ */
+export function formatRelativeTime(iso: string, now: Date = new Date()): string {
+  const then = new Date(iso);
+  const diffMs = now.getTime() - then.getTime();
+  const minutes = Math.floor(diffMs / 60_000);
+
+  // Datas futuras (publicação agendada que acabou de entrar no ar) não viram
+  // "há -3 min": tratamos como agora.
+  if (minutes < 1) return "agora";
+  if (minutes < 60) return `há ${minutes} min`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `há ${hours} h`;
+
+  // O corte do "ontem" é por dia do calendário em Brasília, não por 24h
+  // corridas: publicado 23h de ontem e lido 8h de hoje é "ontem", não "há 9 h".
+  const dayKey = (d: Date) => {
+    const p = getSaoPauloParts(d);
+    return `${p.year}-${p.month}-${p.day}`;
+  };
+  const days = Math.floor(
+    (Date.parse(`${dayKey(now)}T00:00:00Z`) - Date.parse(`${dayKey(then)}T00:00:00Z`)) / 86_400_000,
+  );
+
+  if (days <= 1) return "ontem";
+  if (days < 7) return `há ${days} dias`;
+  return formatDate(iso);
+}
+
 export function formatDateTime(iso: string): string {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",

@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { PostRow } from "@/lib/supabase/types";
 import { getCategoryByValue } from "@/lib/constants";
 import { getPostUrlPath } from "@/lib/seo";
-import { formatDate } from "@/lib/format";
+import { formatRelativeTime } from "@/lib/format";
 import { coverObjectPosition } from "@/lib/cover-framing";
 import { Badge } from "@/components/ui/Badge";
 
@@ -65,7 +65,11 @@ export function PostCard({
           <p className="text-sm text-muted line-clamp-2">{post.excerpt}</p>
         ) : null}
         <div className="mt-auto pt-2 text-xs text-muted">
-          {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de leitura
+          <time dateTime={post.published_at ?? post.created_at}>
+            {formatRelativeTime(post.published_at ?? post.created_at)}
+          </time>
+          {" · "}
+          {post.reading_time_minutes} min de leitura
         </div>
       </div>
     </article>
