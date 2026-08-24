@@ -69,6 +69,27 @@ export const SOCIAL_LINKS = {
   handle: "@centraldobeloo",
 };
 
+/**
+ * E-mail de contato exibido nas páginas de Contato e Política de Privacidade.
+ *
+ * O Google (AdSense e Google Ads) exige uma forma de contato direta e
+ * funcional; perfis de rede social sozinhos costumam não ser aceitos. A LGPD
+ * também exige um canal para o titular exercer seus direitos. Defina
+ * `NEXT_PUBLIC_CONTACT_EMAIL` com um endereço que realmente receba mensagens —
+ * enquanto ele não existir, o bloco de e-mail simplesmente não é exibido (é
+ * pior mostrar um endereço que não funciona).
+ */
+export function getContactEmail(): string | null {
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+  return email ? email : null;
+}
+
+/**
+ * Assinatura das publicações. O Google avalia autoria e responsabilidade
+ * editorial ("quem escreveu isto?") na análise de conteúdo.
+ */
+export const EDITORIAL_BYLINE = "Redação Central do Belo";
+
 export const DEVELOPER = {
   name: "josegnetto",
   github: "https://github.com/josegnetto",

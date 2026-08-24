@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
+import { Mail as MailIcon } from "lucide-react";
 import { InstagramIcon, XIcon } from "@/components/icons/BrandIcons";
 import { StarMark } from "@/components/ui/StarMark";
-import { SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { SITE_NAME, SOCIAL_LINKS, getContactEmail } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -11,7 +13,20 @@ export const metadata: Metadata = {
 };
 
 export default function ContatoPage() {
+  const email = getContactEmail();
+
   const channels = [
+    ...(email
+      ? [
+          {
+            label: "E-mail",
+            handle: email,
+            href: `mailto:${email}`,
+            icon: MailIcon,
+            description: "Melhor canal para correções, pautas e assuntos comerciais.",
+          },
+        ]
+      : []),
     {
       label: "Instagram",
       handle: SOCIAL_LINKS.handle,
@@ -45,8 +60,9 @@ export default function ContatoPage() {
           <a
             key={label}
             href={href}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(href.startsWith("mailto:")
+              ? {}
+              : { target: "_blank", rel: "noopener noreferrer" })}
             className="card-glow group flex flex-col gap-2 rounded-md border border-line bg-paper-muted/40 p-5"
           >
             <span className="flex items-center gap-2 font-semibold text-ink">
@@ -61,7 +77,11 @@ export default function ContatoPage() {
 
       <p className="mt-8 text-sm text-muted">
         Respondemos o mais rápido possível, geralmente em até 48 horas. Correções de conteúdo têm
-        prioridade.
+        prioridade — veja como tratamos erros na nossa{" "}
+        <Link href="/politica-editorial" className="font-semibold text-accent hover:text-accent-dark">
+          Política Editorial
+        </Link>
+        .
       </p>
     </div>
   );

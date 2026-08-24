@@ -104,7 +104,7 @@ export function HomeBanner() {
             width={416}
             height={520}
             priority
-            className="float-slow relative h-52 w-auto drop-shadow-[0_25px_45px_rgba(0,0,0,0.4)] md:h-72"
+            className="crest-relief float-slow relative h-52 w-auto md:h-72"
           />
         </div>
       </div>

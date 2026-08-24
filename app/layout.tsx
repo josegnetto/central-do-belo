@@ -23,16 +23,6 @@ const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
-// Modo escuro é o padrão do site; só aplicamos "light" quando o usuário escolheu explicitamente.
-const THEME_INIT_SCRIPT = `
-(function () {
-  try {
-    var stored = localStorage.getItem("theme");
-    document.documentElement.dataset.theme = stored === "light" ? "light" : "dark";
-  } catch (e) {}
-})();
-`;
-
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
@@ -44,6 +34,21 @@ export const metadata: Metadata = {
   verification: gscVerification ? { google: gscVerification } : undefined,
   alternates: {
     types: { "application/rss+xml": "/feed.xml" },
+  },
+  // Meta tag oficial de verificação de propriedade do AdSense. É por ela que o
+  // Google confirma que o site é seu quando você o adiciona em "Sites"; sem
+  // ela (ou sem o snippet no <head>) a análise fica presa em "Requer atenção".
+  other: adsenseClientId ? { "google-adsense-account": adsenseClientId } : undefined,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
     type: "website",
@@ -73,11 +78,7 @@ export default function RootLayout({
   const supabaseOrigin = process.env.NEXT_PUBLIC_SUPABASE_URL || null;
 
   return (
-    <html
-      lang="pt-BR"
-      className={`${inter.variable} ${lora.variable} h-full`}
-      suppressHydrationWarning
-    >
+    <html lang="pt-BR" className={`${inter.variable} ${lora.variable} h-full`}>
       <head>
         {supabaseOrigin ? <link rel="preconnect" href={supabaseOrigin} crossOrigin="" /> : null}
         {/* Preconnect adianta o handshake DNS/TLS dos scripts de anúncio/analytics,
@@ -119,9 +120,6 @@ export default function RootLayout({
         ) : null}
       </head>
       <body className="min-h-full flex flex-col bg-paper text-ink antialiased">
-        <Script id="theme-init" strategy="beforeInteractive">
-          {THEME_INIT_SCRIPT}
-        </Script>
         {children}
       </body>
       {gaId ? <GoogleAnalytics gaId={gaId} /> : null}

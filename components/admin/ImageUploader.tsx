@@ -158,6 +158,7 @@ export function ImageUploader({
               src={value}
               alt="Capa da publicação"
               fill
+              sizes="(min-width: 768px) 640px, 100vw"
               className="pointer-events-none object-cover"
               style={{ objectPosition: `${framing.x}% ${framing.y}%` }}
             />

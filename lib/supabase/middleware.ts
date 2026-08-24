@@ -1,6 +1,11 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { getSupabaseAnonKey, getSupabaseUrl, isSupabaseConfigured } from "@/lib/supabase/env";
+import {
+  getSupabaseAnonKey,
+  getSupabaseUrl,
+  isSupabaseConfigured,
+  shouldUseMockData,
+} from "@/lib/supabase/env";
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -9,8 +14,17 @@ export async function updateSession(request: NextRequest) {
   const isLoginRoute = request.nextUrl.pathname === "/admin/login";
 
   if (!isSupabaseConfigured()) {
-    // Sem Supabase configurado ainda: deixa o site público navegável,
-    // mas o painel admin depende de um projeto Supabase real.
+    // Em desenvolvimento, deixa navegar no painel com dados de exemplo.
+    if (shouldUseMockData()) return response;
+
+    // Em produção sem Supabase não há como verificar sessão nenhuma. Deixar
+    // passar abriria /admin para qualquer visitante, então a rota é bloqueada.
+    if (isAdminRoute) {
+      return new NextResponse(
+        "Painel administrativo indisponível: Supabase não configurado neste ambiente.",
+        { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } },
+      );
+    }
     return response;
   }
 

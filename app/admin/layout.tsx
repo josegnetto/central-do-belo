@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 
+// O painel depende da sessão de cada requisição: nunca deve ser pré-gerado no
+// build (que roda sem as variáveis do Supabase) nem cacheado entre usuários.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: {
     default: "Painel administrativo",

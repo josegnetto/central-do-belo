@@ -79,6 +79,7 @@ export function Footer() {
                 {[
                   { label: "Sobre", href: "/sobre" },
                   { label: "Contato", href: "/contato" },
+                  { label: "Política Editorial", href: "/politica-editorial" },
                   { label: "Política de Privacidade", href: "/politica-de-privacidade" },
                   { label: "Termos de Uso", href: "/termos-de-uso" },
                 ].map((item) => (
@@ -103,13 +104,14 @@ export function Footer() {
           <div className="mt-5 flex flex-wrap items-center justify-center gap-4 md:justify-start">
             {PARTNERS.map((partner) => {
               const content = (
-                <span className="flex h-16 w-32 items-center justify-center rounded-md bg-white p-2.5 shadow-sm ring-1 ring-line/60 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-hover:shadow-[0_10px_24px_-8px_var(--color-accent-soft)] group-active:scale-95">
+                <span className="flex h-16 w-32 items-center justify-center p-2.5 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-active:scale-95">
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     width={200}
                     height={100}
-                    className="h-full w-full object-contain"
+                    sizes="128px"
+                    className="partner-logo h-full w-full object-contain"
                   />
                 </span>
               );

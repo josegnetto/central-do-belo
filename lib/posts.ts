@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { isSupabaseConfigured, shouldUseMockData } from "@/lib/supabase/env";
 import { MOCK_POSTS } from "@/lib/mock-data";
 import type { PostRow } from "@/lib/supabase/types";
 import type { PostCategory, PostStatus } from "@/lib/constants";
@@ -26,6 +26,7 @@ export async function getLatestPosts(limit = 10): Promise<PostRow[]> {
   const nowIso = new Date().toISOString();
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     return MOCK_POSTS.filter((p) => isLive(p, nowIso)).sort(sortByPublishedDesc).slice(0, limit);
   }
 
@@ -50,6 +51,7 @@ export async function getPostsByCategory(
   const to = from + POSTS_PER_PAGE - 1;
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return { posts: [], total: 0 };
     const all = MOCK_POSTS.filter((p) => p.category === category && isLive(p, nowIso)).sort(
       sortByPublishedDesc,
     );
@@ -75,6 +77,7 @@ export async function getAllPosts(page = 1): Promise<{ posts: PostRow[]; total: 
   const to = from + POSTS_PER_PAGE - 1;
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return { posts: [], total: 0 };
     const all = MOCK_POSTS.filter((p) => isLive(p, nowIso)).sort(sortByPublishedDesc);
     return { posts: all.slice(from, to + 1), total: all.length };
   }
@@ -97,6 +100,7 @@ export async function getAllLivePostsForSitemap(): Promise<
   const nowIso = new Date().toISOString();
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     return MOCK_POSTS.filter((p) => isLive(p, nowIso));
   }
 
@@ -117,6 +121,7 @@ export async function getPostBySlug(
   const nowIso = new Date().toISOString();
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return null;
     const post = MOCK_POSTS.find((p) => p.category === category && p.slug === slug);
     if (!post || !isLive(post, nowIso)) return null;
     return post;
@@ -139,6 +144,7 @@ export async function getRelatedPosts(post: PostRow, limit = 3): Promise<PostRow
   const nowIso = new Date().toISOString();
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     return MOCK_POSTS.filter((p) => p.category === post.category && p.id !== post.id && isLive(p, nowIso))
       .sort(sortByPublishedDesc)
       .slice(0, limit);
@@ -164,6 +170,7 @@ export async function searchPosts(query: string): Promise<PostRow[]> {
   if (!trimmed) return [];
 
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     const needle = trimmed.toLowerCase();
     return MOCK_POSTS.filter(
       (p) =>
@@ -198,6 +205,7 @@ export interface AdminPostFilters {
 
 export async function listPostsForAdmin(filters: AdminPostFilters = {}): Promise<PostRow[]> {
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return [];
     let items = [...MOCK_POSTS];
     if (filters.status) items = items.filter((p) => p.status === filters.status);
     if (filters.category) items = items.filter((p) => p.category === filters.category);
@@ -222,6 +230,7 @@ export async function listPostsForAdmin(filters: AdminPostFilters = {}): Promise
 
 export async function getPostByIdForAdmin(id: string): Promise<PostRow | null> {
   if (!isSupabaseConfigured()) {
+    if (!shouldUseMockData()) return null;
     return MOCK_POSTS.find((p) => p.id === id) ?? null;
   }
 

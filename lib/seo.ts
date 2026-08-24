@@ -1,6 +1,12 @@
 import type { PostRow } from "@/lib/supabase/types";
 import { getCategoryByValue } from "@/lib/constants";
-import { SITE_DESCRIPTION, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import {
+  EDITORIAL_BYLINE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SOCIAL_LINKS,
+  getContactEmail,
+} from "@/lib/constants";
 import { stripCoverFraming } from "@/lib/cover-framing";
 
 export function getSiteUrl(): string {
@@ -55,6 +61,16 @@ export function buildWebSiteJsonLd() {
           url: `${siteUrl}/logobelo.png`,
         },
         sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.x],
+        email: getContactEmail() ?? undefined,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "editorial",
+          url: `${siteUrl}/contato`,
+          email: getContactEmail() ?? undefined,
+          availableLanguage: ["Portuguese"],
+        },
+        ethicsPolicy: `${siteUrl}/politica-editorial`,
+        correctionsPolicy: `${siteUrl}/politica-editorial`,
       },
     ],
   };
@@ -76,6 +92,20 @@ export function buildBreadcrumbJsonLd(items: { label: string; path?: string }[])
   };
 }
 
+/** Editora usada no JSON-LD das publicações (a home usa o @graph acima). */
+function buildPublisher() {
+  const siteUrl = getSiteUrl();
+  return {
+    "@type": "NewsMediaOrganization",
+    name: SITE_NAME,
+    url: siteUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/logobelo.png`,
+    },
+  };
+}
+
 export function buildNewsArticleJsonLd(post: PostRow) {
   const url = getPostAbsoluteUrl(post);
   const category = getCategoryByValue(post.category);
@@ -89,21 +119,17 @@ export function buildNewsArticleJsonLd(post: PostRow) {
     datePublished: post.published_at ?? post.created_at,
     dateModified: post.updated_at,
     articleSection: category.label,
+    inLanguage: "pt-BR",
+    isAccessibleForFree: true,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
     },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      logo: {
-        "@type": "ImageObject",
-        url: `${getSiteUrl()}/logobelo.png`,
-      },
-    },
+    publisher: buildPublisher(),
     author: {
       "@type": "Organization",
-      name: SITE_NAME,
+      name: EDITORIAL_BYLINE,
+      url: `${getSiteUrl()}/sobre`,
     },
   };
 }

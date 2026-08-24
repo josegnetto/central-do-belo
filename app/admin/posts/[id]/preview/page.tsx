@@ -49,6 +49,7 @@ export default async function PreviewPostPage({ params }: PageProps) {
               src={post.cover_image_url}
               alt={post.title}
               fill
+              sizes="(min-width: 768px) 768px, 100vw"
               className="object-cover"
               style={{ objectPosition: coverObjectPosition(post.cover_image_url) }}
             />

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/public/Breadcrumbs";
 import { StarMark } from "@/components/ui/StarMark";
-import { SITE_NAME } from "@/lib/constants";
+import { SITE_NAME, getContactEmail } from "@/lib/constants";
 import { getSiteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 
 export default function PoliticaDePrivacidadePage() {
   const siteUrl = getSiteUrl();
+  const email = getContactEmail();
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
@@ -45,9 +46,9 @@ export default function PoliticaDePrivacidadePage() {
         <h2>2. Cookies</h2>
         <p>
           Utilizamos cookies e tecnologias semelhantes para melhorar sua experiência de navegação,
-          lembrar preferências (como o tema claro/escuro) e medir audiência. Você pode desativar os
-          cookies nas configurações do seu navegador, mas algumas funcionalidades podem deixar de
-          funcionar corretamente.
+          lembrar preferências (como o aceite deste aviso) e medir audiência. Você pode desativar
+          os cookies nas configurações do seu navegador, mas algumas funcionalidades podem deixar
+          de funcionar corretamente.
         </p>
 
         <h2>3. Google Analytics</h2>
@@ -96,12 +97,32 @@ export default function PoliticaDePrivacidadePage() {
           </li>
         </ul>
 
+        <p>
+          Além do Google, outros fornecedores terceiros podem veicular anúncios neste site por meio
+          da rede do Google. Esses parceiros também podem usar cookies para medir desempenho e
+          limitar a frequência com que um mesmo anúncio é exibido a você.
+        </p>
+
         <h2>5. Seus direitos (LGPD)</h2>
         <p>
           Nos termos da LGPD, você pode solicitar a confirmação da existência de tratamento de
           dados, o acesso, a correção ou a eliminação de dados pessoais eventualmente tratados por
-          nós. Para exercer esses direitos, entre em contato pelos canais da nossa página de{" "}
-          <Link href="/contato">contato</Link>.
+          nós, bem como revogar o consentimento dado para o uso de cookies.
+        </p>
+        <p>
+          Para exercer esses direitos, escreva para{" "}
+          {email ? (
+            <a href={`mailto:${email}`}>{email}</a>
+          ) : (
+            <>os canais da nossa página de <Link href="/contato">contato</Link></>
+          )}
+          {email ? (
+            <>
+              {" "}ou use os canais da página de <Link href="/contato">contato</Link>
+            </>
+          ) : null}
+          . O responsável pelo tratamento dos dados coletados neste site é a equipe do{" "}
+          {SITE_NAME}.
         </p>
 
         <h2>6. Links externos</h2>

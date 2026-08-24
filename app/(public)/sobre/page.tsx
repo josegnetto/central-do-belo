@@ -50,6 +50,12 @@ export default function SobrePage() {
           clube.
         </p>
         <p>
+          Todo o conteúdo publicado aqui é escrito e revisado por pessoas. Nossa{" "}
+          <Link href="/politica-editorial">Política Editorial</Link> detalha como apuramos as
+          informações, como creditamos fontes, como separamos notícia de opinião e o que fazemos
+          quando erramos.
+        </p>
+        <p>
           Quer falar com a gente? Visite a página de{" "}
           <Link href="/contato">contato</Link> ou nos encontre nas redes sociais como{" "}
           <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer">
