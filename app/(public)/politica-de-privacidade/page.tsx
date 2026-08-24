@@ -46,9 +46,9 @@ export default function PoliticaDePrivacidadePage() {
         <h2>2. Cookies</h2>
         <p>
           Utilizamos cookies e tecnologias semelhantes para melhorar sua experiência de navegação,
-          lembrar preferências (como o tema claro/escuro) e medir audiência. Você pode desativar os
-          cookies nas configurações do seu navegador, mas algumas funcionalidades podem deixar de
-          funcionar corretamente.
+          lembrar preferências (como o aceite deste aviso) e medir audiência. Você pode desativar
+          os cookies nas configurações do seu navegador, mas algumas funcionalidades podem deixar
+          de funcionar corretamente.
         </p>
 
         <h2>3. Google Analytics</h2>

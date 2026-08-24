@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { CATEGORIES } from "@/lib/constants";
 import { SearchBox } from "@/components/public/SearchBox";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Logo } from "@/components/ui/Logo";
 import { StarMark } from "@/components/ui/StarMark";
 import { cn } from "@/lib/cn";
@@ -36,12 +35,7 @@ export function Navbar() {
           <SearchBox />
         </div>
 
-        <div className="hidden md:block">
-          <ThemeToggle />
-        </div>
-
         <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
           <button
             type="button"
             className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full text-ink transition-all duration-300 hover:bg-paper-muted hover:text-accent active:scale-90"

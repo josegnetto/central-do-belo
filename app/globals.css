@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Modo escuro é o modo principal do site. */
+/* O site é só modo escuro — não há alternância de tema. */
 :root {
   --color-ink: #f4f2ef;
   --color-ink-soft: #d6d3ce;
@@ -18,22 +18,6 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
   color-scheme: dark;
-}
-
-:root[data-theme="light"] {
-  --color-ink: #0a0a0a;
-  --color-ink-soft: #262626;
-  --color-paper: #ffffff;
-  --color-paper-muted: #f7f6f4;
-  --color-accent: #cc1414;
-  --color-accent-dark: #9c0f0f;
-  --color-accent-soft: rgba(204, 20, 20, 0.28);
-  --color-line: #e6e3df;
-  --color-muted: #6b6b6b;
-  --shadow-sm: 0 2px 6px rgba(15, 15, 15, 0.12), 0 1px 3px rgba(15, 15, 15, 0.1);
-  --shadow-md: 0 20px 45px -10px rgba(15, 15, 15, 0.28), 0 8px 20px -8px rgba(15, 15, 15, 0.16);
-  --shadow-lg: 0 35px 70px -15px rgba(15, 15, 15, 0.38), 0 15px 30px -10px rgba(15, 15, 15, 0.22);
-  color-scheme: light;
 }
 
 @theme inline {
@@ -265,17 +249,12 @@ body {
   }
 }
 
-/* O escudo do Belo é quase todo preto, e o fundo do tema escuro é #0a0a0a:
-   sem tratamento, o corpo do escudo some e só sobram o contorno branco e a
-   estrela flutuando. No escuro usamos um halo claro para recortar a silhueta;
-   no claro, uma sombra escura comum, que ali já resolve. */
+/* O escudo do Belo é quase todo preto e o fundo do site é #0a0a0a: sem
+   tratamento, o corpo do escudo some e só sobram o contorno branco e a estrela
+   flutuando. O halo claro recorta a silhueta contra o fundo. */
 .crest-relief {
   filter: drop-shadow(0 0 22px rgba(244, 242, 239, 0.22))
     drop-shadow(0 24px 42px rgba(0, 0, 0, 0.55));
-}
-
-:root[data-theme="light"] .crest-relief {
-  filter: drop-shadow(0 24px 42px rgba(15, 15, 15, 0.3));
 }
 
 /* Flutuação suave e contínua — usada no escudo do banner da home */

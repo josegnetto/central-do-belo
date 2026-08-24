@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FilePlus2, LayoutDashboard } from "lucide-react";
 import { LogoutButton } from "@/components/admin/LogoutButton";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Logo } from "@/components/ui/Logo";
 
 export function AdminShell({
@@ -39,7 +38,6 @@ export function AdminShell({
           </div>
           <div className="flex items-center gap-4">
             {email ? <span className="hidden text-sm text-muted sm:inline">{email}</span> : null}
-            <ThemeToggle />
             <LogoutButton />
           </div>
         </div>
