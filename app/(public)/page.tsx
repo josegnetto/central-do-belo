@@ -6,6 +6,7 @@ import { PostCard } from "@/components/public/PostCard";
 import { LeadStory } from "@/components/public/LeadStory";
 import { Headline } from "@/components/public/Headline";
 import { AdSlot } from "@/components/public/AdSlot";
+import { WelcomeStrip } from "@/components/public/WelcomeStrip";
 import { Reveal } from "@/components/ui/Reveal";
 import { StarMark } from "@/components/ui/StarMark";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
@@ -79,45 +80,48 @@ export default async function HomePage() {
   const gridPosts = rest.slice(hasSidebar ? sidebar.length : 0);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 md:px-6">
+    <div>
       <WebSiteJsonLd />
+      <WelcomeStrip />
 
-      {/* Manchete + destaques: a primeira tela é notícia, não institucional. */}
-      <section className="border-b border-line py-6 md:py-8">
-        <div className={hasSidebar ? "grid gap-8 lg:grid-cols-3" : ""}>
-          <div className={hasSidebar ? "lg:col-span-2" : "mx-auto max-w-4xl"}>
-            <LeadStory post={featured} />
-          </div>
+      <div className="mx-auto max-w-6xl px-4 md:px-6">
+        {/* Manchete + destaques: a primeira tela é notícia, não institucional. */}
+        <section className="border-b border-line py-6 md:py-8">
+          <div className={hasSidebar ? "grid gap-8 lg:grid-cols-3" : ""}>
+            <div className={hasSidebar ? "lg:col-span-2" : "mx-auto max-w-4xl"}>
+              <LeadStory post={featured} />
+            </div>
 
-          {hasSidebar ? (
-            <aside className="lg:col-span-1">
-              <SectionHeading title="Destaques" />
-              <div className="divide-y divide-line">
-                {sidebar.map((post) => (
-                  <Headline key={post.id} post={post} />
-                ))}
-              </div>
-            </aside>
-          ) : null}
-        </div>
-      </section>
-
-      <div className="py-6">
-        <AdSlot slot="home-top" className="min-h-24" />
-      </div>
-
-      {gridPosts.length > 0 ? (
-        <section className="pb-12">
-          <SectionHeading title="Últimas publicações" href="/publicacoes" linkLabel="Ver todas" />
-          <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {gridPosts.map((post, index) => (
-              <Reveal key={post.id} delay={(index % 3) * 80}>
-                <PostCard post={post} />
-              </Reveal>
-            ))}
+            {hasSidebar ? (
+              <aside className="lg:col-span-1">
+                <SectionHeading title="Destaques" />
+                <div className="divide-y divide-line">
+                  {sidebar.map((post) => (
+                    <Headline key={post.id} post={post} />
+                  ))}
+                </div>
+              </aside>
+            ) : null}
           </div>
         </section>
-      ) : null}
+
+        <div className="py-6">
+          <AdSlot slot="home-top" className="min-h-24" />
+        </div>
+
+        {gridPosts.length > 0 ? (
+          <section className="pb-12">
+            <SectionHeading title="Últimas publicações" href="/publicacoes" linkLabel="Ver todas" />
+            <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {gridPosts.map((post, index) => (
+                <Reveal key={post.id} delay={(index % 3) * 80}>
+                  <PostCard post={post} />
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </div>
     </div>
   );
 }
