@@ -1,11 +1,11 @@
 import type { PostRow } from "@/lib/supabase/types";
 import { getCategoryByValue } from "@/lib/constants";
 import {
-  EDITORIAL_BYLINE,
   SITE_DESCRIPTION,
   SITE_NAME,
   SOCIAL_LINKS,
   getContactEmail,
+  resolveByline,
 } from "@/lib/constants";
 import { stripCoverFraming } from "@/lib/cover-framing";
 
@@ -109,6 +109,7 @@ function buildPublisher() {
 export function buildNewsArticleJsonLd(post: PostRow) {
   const url = getPostAbsoluteUrl(post);
   const category = getCategoryByValue(post.category);
+  const byline = resolveByline(post.author_name);
 
   return {
     "@context": "https://schema.org",
@@ -126,10 +127,16 @@ export function buildNewsArticleJsonLd(post: PostRow) {
       "@id": url,
     },
     publisher: buildPublisher(),
-    author: {
-      "@type": "Organization",
-      name: EDITORIAL_BYLINE,
-      url: `${getSiteUrl()}/sobre`,
-    },
+    // Assinatura da redação = Organization; jornalista externo = Person.
+    author: byline.isDefault
+      ? {
+          "@type": "Organization",
+          name: byline.name,
+          url: `${getSiteUrl()}/sobre`,
+        }
+      : {
+          "@type": "Person",
+          name: byline.name,
+        },
   };
 }

@@ -8,6 +8,7 @@ export const postFormSchema = z.object({
     .min(3, "Slug muito curto")
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug inválido"),
   excerpt: z.string().trim().max(400).optional().default(""),
+  authorName: z.string().trim().max(120, "Nome do autor muito longo").optional().default(""),
   content: z.record(z.string(), z.unknown()),
   coverImageUrl: z.string().url().nullable(),
   category: z.enum(["noticia", "raio_x", "analise_pos_jogo", "contratacao"]),

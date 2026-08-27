@@ -33,10 +33,13 @@ export default function PoliticaEditorialPage() {
 
         <h2>1. Quem escreve</h2>
         <p>
-          As publicações são assinadas pela <strong>{EDITORIAL_BYLINE}</strong>, formada por
-          torcedores que acompanham o Botafogo-PB de perto. Todo texto publicado aqui é{" "}
-          <strong>escrito por pessoas</strong> e revisado antes de ir ao ar. Não publicamos
-          conteúdo gerado automaticamente sem revisão, nem textos copiados de outros veículos.
+          A maior parte das publicações é assinada pela <strong>{EDITORIAL_BYLINE}</strong>,
+          formada por torcedores que acompanham o Botafogo-PB de perto. Textos produzidos por
+          jornalistas e colaboradores convidados são <strong>assinados com o nome do autor</strong>{" "}
+          no topo da publicação. Em ambos os casos, todo texto publicado aqui é{" "}
+          <strong>escrito por pessoas</strong> e revisado pela redação antes de ir ao ar — que
+          responde editorialmente por tudo que publica. Não publicamos conteúdo gerado
+          automaticamente sem revisão, nem textos copiados de outros veículos.
         </p>
 
         <h2>2. Como apuramos</h2>

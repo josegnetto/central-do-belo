@@ -13,6 +13,7 @@ export type PostRow = {
   status: PostStatus;
   published_at: string | null;
   author_id: string | null;
+  author_name: string | null;
   reading_time_minutes: number;
   seo_title: string | null;
   seo_description: string | null;

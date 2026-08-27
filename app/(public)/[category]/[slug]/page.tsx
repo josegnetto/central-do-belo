@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { EDITORIAL_BYLINE, getCategoryBySlug } from "@/lib/constants";
+import { getCategoryBySlug, resolveByline } from "@/lib/constants";
 import { getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { renderTiptapContent } from "@/lib/tiptap-render";
 import { buildBreadcrumbJsonLd, buildNewsArticleJsonLd, getPostAbsoluteUrl } from "@/lib/seo";
@@ -65,6 +65,7 @@ export default async function PostPage({ params }: PageProps) {
 
   const related = await getRelatedPosts(post);
   const html = renderTiptapContent(post.content);
+  const byline = resolveByline(post.author_name);
 
   const jsonLd = buildNewsArticleJsonLd(post);
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
@@ -105,12 +106,16 @@ export default async function PostPage({ params }: PageProps) {
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-y border-line py-3 text-sm text-muted">
         <span>
           Por{" "}
-          <Link
-            href="/politica-editorial"
-            className="font-semibold text-ink-soft transition-colors hover:text-accent"
-          >
-            {EDITORIAL_BYLINE}
-          </Link>{" "}
+          {byline.isDefault ? (
+            <Link
+              href="/politica-editorial"
+              className="font-semibold text-ink-soft transition-colors hover:text-accent"
+            >
+              {byline.name}
+            </Link>
+          ) : (
+            <span className="font-semibold text-ink-soft">{byline.name}</span>
+          )}{" "}
           · {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de
           leitura
         </span>

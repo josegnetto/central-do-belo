@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { JSONContent } from "@tiptap/core";
 import { Eye } from "lucide-react";
-import { CATEGORIES } from "@/lib/constants";
+import { CATEGORIES, EDITORIAL_BYLINE } from "@/lib/constants";
 import type { PostRow } from "@/lib/supabase/types";
 import { slugFromTitle } from "@/lib/slug";
 import { formatDateTimeLocal, saoPauloLocalToUtcIso } from "@/lib/format";
@@ -29,6 +29,7 @@ export function PostForm({ post }: { post?: PostRow }) {
   const [slug, setSlug] = useState(post?.slug ?? "");
   const [slugTouched, setSlugTouched] = useState(isEditing);
   const [excerpt, setExcerpt] = useState(post?.excerpt ?? "");
+  const [authorName, setAuthorName] = useState(post?.author_name ?? "");
   const [content, setContent] = useState<JSONContent>(post?.content ?? EMPTY_DOC);
   const [coverImageUrl, setCoverImageUrl] = useState<string | null>(post?.cover_image_url ?? null);
   const [category, setCategory] = useState(post?.category ?? CATEGORIES[0].value);
@@ -65,6 +66,7 @@ export function PostForm({ post }: { post?: PostRow }) {
       title: title.trim(),
       slug: slug.trim(),
       excerpt: excerpt.trim(),
+      authorName: authorName.trim(),
       content,
       coverImageUrl,
       category,
@@ -217,6 +219,22 @@ export function PostForm({ post }: { post?: PostRow }) {
                 </option>
               ))}
             </Select>
+          </div>
+
+          <div>
+            <label htmlFor="authorName" className="mb-1 block text-sm font-medium text-ink-soft">
+              Assinatura <span className="font-normal text-muted">(opcional)</span>
+            </label>
+            <Input
+              id="authorName"
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              placeholder={EDITORIAL_BYLINE}
+            />
+            <p className="mt-1 text-xs text-muted">
+              Preencha com o nome do jornalista que assina esta publicação. Se deixar vazio, ela é
+              assinada por <span className="font-medium text-ink-soft">{EDITORIAL_BYLINE}</span>.
+            </p>
           </div>
 
           <ImageUploader value={coverImageUrl} onChange={setCoverImageUrl} />

@@ -85,10 +85,22 @@ export function getContactEmail(): string | null {
 }
 
 /**
- * Assinatura das publicações. O Google avalia autoria e responsabilidade
+ * Assinatura padrão das publicações. O Google avalia autoria e responsabilidade
  * editorial ("quem escreveu isto?") na análise de conteúdo.
  */
 export const EDITORIAL_BYLINE = "Redação Central do Belo";
+
+/**
+ * Resolve quem assina uma publicação: o nome informado no painel (jornalista
+ * externo, colaborador) ou, quando vazio, a assinatura padrão da redação.
+ */
+export function resolveByline(authorName: string | null | undefined): {
+  name: string;
+  isDefault: boolean;
+} {
+  const custom = authorName?.trim();
+  return custom ? { name: custom, isDefault: false } : { name: EDITORIAL_BYLINE, isDefault: true };
+}
 
 export const DEVELOPER = {
   name: "josegnetto",

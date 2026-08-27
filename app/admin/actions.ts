@@ -27,6 +27,8 @@ function buildRow(payload: PostFormPayload) {
     title: payload.title,
     slug: payload.slug,
     excerpt: payload.excerpt || null,
+    // Vazio = assina como a redação (o site aplica a assinatura padrão).
+    author_name: payload.authorName || null,
     content,
     content_text: contentText,
     cover_image_url: payload.coverImageUrl,

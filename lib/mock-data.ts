@@ -187,6 +187,7 @@ export const MOCK_POSTS: PostRow[] = seeds.map((seed) => {
     status: seed.status,
     published_at: seed.published_at,
     author_id: null,
+    author_name: null,
     reading_time_minutes: estimateReadingTimeMinutes(seed.content),
     seo_title: null,
     seo_description: null,

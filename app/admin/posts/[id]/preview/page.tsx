@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { requireAdminUser } from "@/lib/auth";
 import { getPostByIdForAdmin } from "@/lib/posts";
-import { getCategoryByValue } from "@/lib/constants";
+import { getCategoryByValue, resolveByline } from "@/lib/constants";
 import { renderTiptapContent } from "@/lib/tiptap-render";
 import { formatDate } from "@/lib/format";
 import { coverObjectPosition } from "@/lib/cover-framing";
@@ -41,7 +41,8 @@ export default async function PreviewPostPage({ params }: PageProps) {
         <h1 className="mt-3 text-3xl md:text-4xl font-bold leading-tight text-ink">{post.title}</h1>
         {post.excerpt ? <p className="mt-4 text-lg text-muted">{post.excerpt}</p> : null}
         <div className="mt-5 border-y border-line py-3 text-sm text-muted">
-          {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de leitura
+          Por <span className="font-semibold text-ink-soft">{resolveByline(post.author_name).name}</span>{" "}
+          · {formatDate(post.published_at ?? post.created_at)} · {post.reading_time_minutes} min de leitura
         </div>
         {post.cover_image_url ? (
           <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm">
