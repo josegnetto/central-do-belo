@@ -10,13 +10,19 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     background_color: "#0a0a0a",
     theme_color: "#0a0a0a",
-    // PNG antes do SVG de propósito: Android/Chrome ignora ícone em SVG na
-    // instalação do app, e cairia num ícone genérico. O SVG fica por último,
-    // para quem souber usá-lo em qualquer resolução.
+    // Só PNG: Android/Chrome ignora ícone em SVG na instalação do app e cairia
+    // num ícone genérico.
     icons: [
-      { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml" },
+      { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      {
+        // Margem extra: o Android recorta o ícone em círculo/squircle, e sem
+        // zona segura as pontas da estrela ficariam cortadas.
+        src: "/icon-maskable-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
     ],
   };
 }

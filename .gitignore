@@ -45,3 +45,6 @@ next-env.d.ts
 .wrangler/
 .dev.vars
 cloudflare-env.d.ts
+
+# Supabase CLI (artefatos locais)
+supabase/.temp/
