@@ -31,6 +31,18 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  // URLs versionadas (?v=2): Safari e afins guardam o favicon num cache próprio
+  // por URL que sobrevive à limpeza comum de dados do site; mudar a URL é a
+  // única forma confiável de forçar todo mundo a baixar o ícone novo.
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/icon-192.png?v=2", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png?v=2", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico?v=2",
+    apple: { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+  },
   verification: gscVerification ? { google: gscVerification } : undefined,
   alternates: {
     types: { "application/rss+xml": "/feed.xml" },
