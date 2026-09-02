@@ -1,6 +1,7 @@
 import { getLatestPosts } from "@/lib/posts";
 import { getPostAbsoluteUrl, getSiteUrl } from "@/lib/seo";
 import { stripCoverFraming } from "@/lib/cover-framing";
+import { proxiedCoverAbsoluteUrl } from "@/lib/image-proxy";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
 
 export const revalidate = 300;
@@ -22,7 +23,9 @@ export async function GET() {
     .map((post) => {
       const url = getPostAbsoluteUrl(post);
       const pubDate = new Date(post.published_at ?? post.created_at).toUTCString();
-      const cover = post.cover_image_url ? stripCoverFraming(post.cover_image_url) : null;
+      const cover = post.cover_image_url
+        ? proxiedCoverAbsoluteUrl(stripCoverFraming(post.cover_image_url), siteUrl)
+        : null;
 
       return `    <item>
       <title>${escapeXml(post.title)}</title>

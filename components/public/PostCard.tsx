@@ -5,6 +5,7 @@ import { getCategoryByValue } from "@/lib/constants";
 import { getPostUrlPath } from "@/lib/seo";
 import { formatRelativeTime } from "@/lib/format";
 import { coverObjectPosition } from "@/lib/cover-framing";
+import { proxiedCoverPath } from "@/lib/image-proxy";
 import { Badge } from "@/components/ui/Badge";
 
 export function PostCard({
@@ -34,7 +35,7 @@ export function PostCard({
         >
           {post.cover_image_url ? (
             <Image
-              src={post.cover_image_url}
+              src={proxiedCoverPath(post.cover_image_url)}
               alt={post.title}
               fill
               sizes={size === "large" ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 100vw"}

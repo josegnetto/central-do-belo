@@ -1,4 +1,5 @@
 import type { JSONContent } from "@tiptap/core";
+import { proxiedCoverPath } from "@/lib/image-proxy";
 
 // Renderiza o JSON do Tiptap para HTML sem depender de nenhuma implementação
 // de DOM (jsdom/happy-dom). O `@tiptap/html` (generateHTML) resolve, em
@@ -83,7 +84,7 @@ function renderNode(node: JSONContent): string {
       const alt = typeof node.attrs?.alt === "string" ? node.attrs.alt : "";
       const title = typeof node.attrs?.title === "string" ? node.attrs.title : "";
       const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
-      return `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}"${titleAttr} loading="lazy">`;
+      return `<img src="${escapeHtml(proxiedCoverPath(src))}" alt="${escapeHtml(alt)}"${titleAttr} loading="lazy">`;
     }
     case "text":
       return applyMarks(escapeHtml(node.text ?? ""), node.marks);

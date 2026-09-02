@@ -5,6 +5,7 @@ import { getCategoryByValue } from "@/lib/constants";
 import { getPostUrlPath } from "@/lib/seo";
 import { formatRelativeTime } from "@/lib/format";
 import { coverObjectPosition } from "@/lib/cover-framing";
+import { proxiedCoverPath } from "@/lib/image-proxy";
 
 /**
  * Linha de manchete compacta: miniatura, chapéu, título e horário.
@@ -26,7 +27,7 @@ export function Headline({ post, showThumb = true }: { post: PostRow; showThumb?
           className="relative h-16 w-24 shrink-0 overflow-hidden rounded-sm bg-paper-muted sm:h-[4.5rem] sm:w-28"
         >
           <Image
-            src={post.cover_image_url}
+            src={proxiedCoverPath(post.cover_image_url)}
             alt={post.title}
             fill
             sizes="112px"

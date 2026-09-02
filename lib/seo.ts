@@ -8,6 +8,7 @@ import {
   resolveByline,
 } from "@/lib/constants";
 import { stripCoverFraming } from "@/lib/cover-framing";
+import { proxiedCoverAbsoluteUrl } from "@/lib/image-proxy";
 
 export function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
@@ -116,7 +117,9 @@ export function buildNewsArticleJsonLd(post: PostRow) {
     "@type": "NewsArticle",
     headline: post.seo_title || post.title,
     description: post.seo_description || post.excerpt || undefined,
-    image: post.cover_image_url ? [stripCoverFraming(post.cover_image_url)] : undefined,
+    image: post.cover_image_url
+      ? [proxiedCoverAbsoluteUrl(stripCoverFraming(post.cover_image_url), getSiteUrl())]
+      : undefined,
     datePublished: post.published_at ?? post.created_at,
     dateModified: post.updated_at,
     articleSection: category.label,

@@ -5,6 +5,7 @@ import { getCategoryByValue } from "@/lib/constants";
 import { getPostUrlPath } from "@/lib/seo";
 import { formatRelativeTime } from "@/lib/format";
 import { coverObjectPosition } from "@/lib/cover-framing";
+import { proxiedCoverPath } from "@/lib/image-proxy";
 
 /**
  * A manchete: a publicação principal, dominando o topo da home.
@@ -29,7 +30,7 @@ export function LeadStory({ post }: { post: PostRow }) {
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md bg-paper-muted lg:aspect-[21/9]">
           {post.cover_image_url ? (
             <Image
-              src={post.cover_image_url}
+              src={proxiedCoverPath(post.cover_image_url)}
               alt={post.title}
               fill
               sizes="(min-width: 1024px) 66vw, 100vw"
